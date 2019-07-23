@@ -6,8 +6,10 @@ import android.util.SparseArray;
 import android.view.View;
 import android.widget.TextView;
 
+import java.lang.ref.WeakReference;
+
 public class RecycleViewHolder extends RecyclerView.ViewHolder {
-    private SparseArray<View> viewSparseArray;
+    private SparseArray<WeakReference<View>> viewSparseArray;
 
     public RecycleViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -15,10 +17,15 @@ public class RecycleViewHolder extends RecyclerView.ViewHolder {
     }
 
     public View getView(int id) {
-        View view = viewSparseArray.get(id);
-        if (view == null) {
+        WeakReference<View> weakReference = viewSparseArray.get(id);
+        View view = null;
+        if (weakReference == null) {
             view = itemView.findViewById(id);
-            viewSparseArray.put(id, view);
+            if (view != null) {
+                viewSparseArray.put(id, new WeakReference<View>(view));
+            }
+        } else {
+            view = weakReference.get();
         }
         return view;
     }
