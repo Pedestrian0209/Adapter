@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public abstract class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewHolder> {
@@ -75,7 +76,7 @@ public abstract class RecycleViewAdapter extends RecyclerView.Adapter<RecycleVie
      *
      * @param data
      */
-    public void addData(List<IRecycleViewData> data) {
+    public void addData(Collection<? extends IRecycleViewData> data) {
         if (iRecycleViewData == null) {
             iRecycleViewData = new ArrayList<>();
         }
@@ -171,7 +172,7 @@ public abstract class RecycleViewAdapter extends RecyclerView.Adapter<RecycleVie
      *
      * @param data
      */
-    public void removeData(List<IRecycleViewData> data) {
+    public void removeData(Collection<? extends IRecycleViewData> data) {
         if (iRecycleViewData == null || iRecycleViewData.isEmpty()) {
             return;
         } else {
@@ -185,7 +186,7 @@ public abstract class RecycleViewAdapter extends RecyclerView.Adapter<RecycleVie
      *
      * @param data
      */
-    public void replaceAllData(List<IRecycleViewData> data) {
+    public void replaceAllData(Collection<? extends IRecycleViewData> data) {
         if (iRecycleViewData == null) {
             iRecycleViewData = new ArrayList<>();
         }
